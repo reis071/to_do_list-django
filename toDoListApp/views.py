@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def home(request):
+    return render(request, 'toDoListApp/index.html')
+
+def sobre(request):
+    return render(request, 'toDoListApp/teste.html')
