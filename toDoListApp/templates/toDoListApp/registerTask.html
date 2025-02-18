@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register Task</title>
+</head>
+<body>
+    <form action="{% url 'registerTask' %}" method="POST">
+        {% csrf_token %}  <!-- Proteção contra ataques CSRF -->
+
+        <label for="nameTask">Nome da Tarefa:</label>
+        <input type="text" id="nameTask" name="nameTask" required>
+
+        <label for="description">Descrição:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="dateCreation">Data de Criação:</label>
+        <input type="date" id="dateCreation" name="dateCreation" required>
+
+        <button type="submit">Salvar Tarefa</button>
+    </form>
+
+</body>
+</html>

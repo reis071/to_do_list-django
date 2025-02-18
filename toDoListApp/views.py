@@ -1,11 +1,13 @@
-from django.shortcuts import render
-from models import Task
+from django.shortcuts import render,redirect
+from .models import Task
 
 def addTask(request):
     if request.method == 'POST':
-        nameTask = request.POST['nameTask']
-        description = request.POST['description']
-        dateCreation = request.POST['dateCreation']
-        task = Task(nameTask=nameTask,description=description,dateCreation=dateCreation).save()
-        
-        return render(request, 'toDoListapp/cadastrar.html', {'task': task})
+        nameTask = request.POST.get('nameTask')
+        description = request.POST.get('description')
+        dateCreation = request.POST.get('dateCreation')
+
+        if nameTask and description and dateCreation:  # Verifica se os campos não estão vazios
+            Task.objects.create(nameTask=nameTask, description=description, dateCreation=dateCreation)  # 🔹 Melhor prática: redireciona após salvar
+
+    return render(request, 'toDoListapp/registerTask.html')  # 🔹 Agora sempre retorna uma resposta
