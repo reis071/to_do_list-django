@@ -8,6 +8,6 @@ def addTask(request):
         dateCreation = request.POST.get('dateCreation')
 
         if nameTask and description and dateCreation:  # Verifica se os campos não estão vazios
-            Task.objects.create(nameTask=nameTask, description=description, dateCreation=dateCreation)  # 🔹 Melhor prática: redireciona após salvar
+            Task.objects.create(nameTask=nameTask, description=description, dateCreation=dateCreation)  
 
-    return render(request, 'toDoListapp/registerTask.html')  # 🔹 Agora sempre retorna uma resposta
+    return render(request, 'toDoListapp/registerTask.html')
