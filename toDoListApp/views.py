@@ -11,3 +11,8 @@ def addTask(request):
             Task.objects.create(nameTask=nameTask, description=description)  
             return redirect('registerTask')
     return render(request, 'toDoListapp/registerTask.html')
+
+def viewTasks(request):
+    
+    tasks = Task.objects.all()
+    return render(request, 'toDoListapp/viewTasks.html', {'tasks': tasks})
