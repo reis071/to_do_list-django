@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.db.models import Q
 from .models import Task
 
 def addTask(request):
@@ -12,7 +13,7 @@ def addTask(request):
             return redirect('registerTask')
     return render(request, 'toDoListapp/registerTask.html')
 
-def viewTasks(request):
     
+def viewTasks(request):
     tasks = Task.objects.all()
     return render(request, 'toDoListapp/viewTasks.html', {'tasks': tasks})
