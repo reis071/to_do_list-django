@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
-from django.db.models import Q
 from .models import Task
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def addTask(request):
     if request.method == 'POST':
         nameTask = request.POST.get('nameTask')
@@ -9,11 +10,14 @@ def addTask(request):
         
 
         if nameTask and description:  
-            Task.objects.create(nameTask=nameTask, description=description)  
+            Task.objects.create(user=request.user, nameTask=nameTask, description=description)  
             return redirect('registerTask')
-    return render(request, 'toDoListapp/registerTask.html')
+    return render(request, 'toDoListApp/registerTask.html')
 
     
+@login_required
 def viewTasks(request):
-    tasks = Task.objects.all()
-    return render(request, 'toDoListapp/viewTasks.html', {'tasks': tasks})
+    
+    tasks = Task.objects.filter(user=request.user)
+    return render(request, 'toDoListApp/viewTasks.html', {'tasks': tasks})
+
